@@ -1,0 +1,51 @@
+@E_lips_AI_Classificatie_HostAddress = http://localhost:5280
+
+POST {{E_lips_AI_Classificatie_HostAddress}}/api/extract
+Content-Type: application/json
+
+{
+	"text": "Transport order: RelatieCode R123, 1 x 20FT container, bruto gewicht 18000, zegel ABC123. Pickup terminal Maasvlakte Rotterdam. Afleveren bij Bedrijf Test BV, Straatweg 1, 3011AA Rotterdam. Financieel: object transport, prijs 450 EUR, BTW code H, fin code T01."
+}
+
+###
+
+POST {{E_lips_AI_Classificatie_HostAddress}}/api/extract/file
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="File"; filename="sample.eml"
+Content-Type: message/rfc822
+
+< ./samples/sample.eml
+--boundary--
+
+###
+
+POST {{E_lips_AI_Classificatie_HostAddress}}/api/extract/file
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="File"; filename="sample.pdf"
+Content-Type: application/pdf
+
+< ./samples/sample.pdf
+--boundary--
+
+###
+
+POST {{E_lips_AI_Classificatie_HostAddress}}/api/extract/file
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="File"; filename="sample.png"
+Content-Type: image/png
+
+< ./samples/sample.png
+--boundary--
+
+###
+
+GET {{E_lips_AI_Classificatie_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
