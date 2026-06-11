@@ -1,0 +1,6 @@
+# How to use
+### - You need atleast 6.2Gib of internal space, so close up all windows and programs that are using internal storage.
+
+## - dotnet watch run
+
+## - Use the Extract File endpoint and choose a document to extract information from
