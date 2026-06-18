@@ -9,7 +9,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<OllamaService>((serviceProvider, httpClient) =>
 {
     var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-    var timeoutSeconds = configuration.GetValue<int?>("Ollama:TimeoutSeconds") ?? 300;
+    var timeoutSeconds = configuration.GetValue<int?>("Ollama:TimeoutSeconds") ?? 900;
     httpClient.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
 });
 builder.Services.AddScoped<ExtractionService>();

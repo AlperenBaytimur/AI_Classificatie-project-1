@@ -4,14 +4,25 @@ public class XmlService
 {
     public string ToXml(Opdracht o)
     {
-        var xml = new XElement("Opdracht",
+        return ToOpdrachtElement(o).ToString();
+    }
+
+    public string ToXml(ExtractionOutcome result)
+    {
+        var xml = ToOpdrachtElement(result.Data);
+        xml.Add(new XElement("ConfidenceScore", result.ConfidenceScore));
+
+        return xml.ToString();
+    }
+
+    private static XElement ToOpdrachtElement(Opdracht o)
+    {
+        return new XElement("Opdracht",
             new XElement("RelatieCode", o.RelatieCode),
             new XElement("Aantal", o.Aantal),
             new XElement("ContainerType", o.ContainerType),
             new XElement("BrutoGewicht", o.BrutoGewicht),
-
-            new XElement("ZegelNummers",
-                o.ZegelNummers?.Select(z => new XElement("Zegel", z))
+            new XElement("ZegelNummers", o.ZegelNummers?.Select(z => new XElement("Zegel", z))
             ),
 
             new XElement("Activiteiten",
@@ -35,7 +46,5 @@ public class XmlService
                 new XElement("Fin_Code", o.Financieel?.Fin_Code)
             )
         );
-
-        return xml.ToString();
     }
 }

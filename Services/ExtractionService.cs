@@ -50,10 +50,12 @@ public class ExtractionService
         MissingFields = missingFields
       };
     }
-    catch
+    catch (Exception ex)
     {
-      Console.WriteLine("❌ JSON parsing failed:");
-      Console.WriteLine(aiOutput);
+      Console.WriteLine("JSON parsing failed:");
+      Console.WriteLine($"Exception: {ex.GetType().Name}");
+      Console.WriteLine($"Message: {ex.Message}");
+      Console.WriteLine($"Output: {aiOutput}");
       return null;
     }
   }
@@ -93,6 +95,7 @@ public class ExtractionService
 
     return (score, missing);
   }
+
 
   private string BuildPrompt(string text)
   {
